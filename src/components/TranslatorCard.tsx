@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ArrowRightLeft, 
@@ -16,6 +16,23 @@ import { useLanguageDetection } from '../hooks/useLanguageDetection';
 import { useSpellCheck } from '../hooks/useSpellCheck';
 import { translate, SUPPORTED_LANGUAGES, getLanguageInfo, TranslationResult } from '../services/translationService';
 import { useToast } from '../hooks/use-toast';
+import { useAuth } from '../contexts/AuthContext';
+import { PaywallModal } from './PaywallModal';
+
+const FREE_TRANSLATIONS_LIMIT = 2;
+const TRANSLATIONS_KEY = 'nocrioulo_translations_count';
+
+function getStoredTranslations(): number {
+  const stored = localStorage.getItem(TRANSLATIONS_KEY);
+  return stored ? parseInt(stored, 10) : 0;
+}
+
+function incrementStoredTranslations(): number {
+  const current = getStoredTranslations();
+  const newCount = current + 1;
+  localStorage.setItem(TRANSLATIONS_KEY, newCount.toString());
+  return newCount;
+}
 
 export function TranslatorCard() {
   const [inputText, setInputText] = useState('');
@@ -24,10 +41,32 @@ export function TranslatorCard() {
   const [result, setResult] = useState<TranslationResult | null>(null);
   const [isTranslating, setIsTranslating] = useState(false);
   const [feedback, setFeedback] = useState<'up' | 'down' | null>(null);
+  const [showPaywall, setShowPaywall] = useState(false);
+  const [translationsUsed, setTranslationsUsed] = useState(0);
   
   const { detectedLanguage } = useLanguageDetection(inputText);
   const { suggestions, acceptSuggestion, ignoreSuggestion } = useSpellCheck(inputText, fromLang);
   const { toast } = useToast();
+  const { user, profile, incrementTranslation } = useAuth();
+
+  // Initialize translations count
+  useEffect(() => {
+    if (profile) {
+      setTranslationsUsed(profile.translationsUsed);
+    } else {
+      setTranslationsUsed(getStoredTranslations());
+    }
+  }, [profile]);
+
+  // Check if user can translate (is premium or under limit)
+  const canTranslate = (): boolean => {
+    // If user has premium plan, always allow
+    if (profile?.plan === 'premium') return true;
+    
+    // Check translations count
+    const count = profile ? profile.translationsUsed : getStoredTranslations();
+    return count < FREE_TRANSLATIONS_LIMIT;
+  };
 
   const handleSwapLanguages = () => {
     setFromLang(toLang);
@@ -48,12 +87,28 @@ export function TranslatorCard() {
       return;
     }
 
+    // Check paywall
+    if (!canTranslate()) {
+      setShowPaywall(true);
+      return;
+    }
+
     setIsTranslating(true);
     setFeedback(null);
     
     try {
       const translationResult = await translate(inputText, fromLang, toLang);
       setResult(translationResult);
+      
+      // Increment translation count
+      if (profile) {
+        // Will be incremented via AuthContext
+        incrementTranslation();
+        setTranslationsUsed(profile.translationsUsed + 1);
+      } else {
+        const newCount = incrementStoredTranslations();
+        setTranslationsUsed(newCount);
+      }
     } catch (error) {
       toast({
         title: "Erro na tradução",
@@ -63,7 +118,7 @@ export function TranslatorCard() {
     } finally {
       setIsTranslating(false);
     }
-  }, [inputText, fromLang, toLang, toast]);
+  }, [inputText, fromLang, toLang, toast, profile]);
 
   const handleCopy = async () => {
     if (result) {
@@ -329,6 +384,13 @@ export function TranslatorCard() {
           </AnimatePresence>
         </div>
       </div>
+
+      {/* Paywall Modal */}
+      <PaywallModal
+        isOpen={showPaywall}
+        onClose={() => setShowPaywall(false)}
+        translationsUsed={translationsUsed}
+      />
     </motion.div>
   );
 }
