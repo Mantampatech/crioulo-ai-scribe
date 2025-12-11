@@ -6,8 +6,6 @@ import {
   ThumbsUp, 
   ThumbsDown, 
   Lightbulb,
-  Check,
-  X,
   Sparkles,
   BookOpen
 } from 'lucide-react';
@@ -45,7 +43,7 @@ export function TranslatorCard() {
   const [translationsUsed, setTranslationsUsed] = useState(0);
   
   const { detectedLanguage } = useLanguageDetection(inputText);
-  const { suggestions, acceptSuggestion, ignoreSuggestion } = useSpellCheck(inputText, fromLang);
+  const { suggestions } = useSpellCheck(inputText, fromLang);
   const { toast } = useToast();
   const { user, profile, incrementTranslation } = useAuth();
 
@@ -154,8 +152,7 @@ export function TranslatorCard() {
   };
 
   const handleAcceptSuggestion = (original: string, suggestion: string) => {
-    const newText = acceptSuggestion(original, suggestion);
-    setInputText(newText);
+    setInputText(original);
   };
 
   const fromLangInfo = getLanguageInfo(fromLang);
@@ -255,43 +252,33 @@ export function TranslatorCard() {
             </div>
           </div>
 
-          {/* Spelling Suggestions */}
+          {/* Phrase Suggestions */}
           <AnimatePresence>
             {suggestions.length > 0 && (
               <motion.div
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
-                className="bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 rounded-xl p-4 space-y-3"
+                className="bg-accent/5 border border-accent/20 rounded-xl p-4 space-y-3"
               >
-                <div className="flex items-center gap-2 text-amber-700 dark:text-amber-300">
+                <div className="flex items-center gap-2 text-accent">
                   <Lightbulb className="w-4 h-4" />
-                  <span className="font-medium text-sm">Sugestões de correção:</span>
+                  <span className="font-medium text-sm">Frases úteis relacionadas:</span>
                 </div>
                 {suggestions.map((suggestion, index) => (
-                  <div key={index} className="flex items-center justify-between gap-2 bg-white dark:bg-background/50 rounded-lg p-3">
-                    <div className="text-sm">
-                      <span className="text-muted-foreground">"{suggestion.original}"</span>
-                      <span className="mx-2">→</span>
-                      <span className="font-semibold text-foreground">"{suggestion.suggestion}"</span>
+                  <div key={index} className="flex items-center justify-between gap-2 bg-background/50 rounded-lg p-3">
+                    <div className="text-sm flex-1">
+                      <span className="font-medium text-foreground">{suggestion.original}</span>
+                      <span className="mx-2 text-muted-foreground">→</span>
+                      <span className="text-muted-foreground">{suggestion.suggestion}</span>
                     </div>
-                    <div className="flex items-center gap-1">
-                      <Button
-                        variant="success"
-                        size="sm"
-                        onClick={() => handleAcceptSuggestion(suggestion.original, suggestion.suggestion)}
-                      >
-                        <Check className="w-3 h-3 mr-1" />
-                        Aceitar
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => ignoreSuggestion(suggestion.original)}
-                      >
-                        <X className="w-3 h-3" />
-                      </Button>
-                    </div>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handleAcceptSuggestion(suggestion.original, suggestion.suggestion)}
+                    >
+                      Usar
+                    </Button>
                   </div>
                 ))}
               </motion.div>
