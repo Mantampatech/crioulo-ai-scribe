@@ -177,13 +177,50 @@ export async function translate(
     };
   }
   
-  // 3. For languages other than pt/kriol, or low confidence, we'd need AI
-  // For now, return best effort with suggestions
+// 3. Use AI for intelligent translation
+  try {
+    const aiResult = await translateWithAI(text, fromLang, toLang);
+    return {
+      ...aiResult,
+      suggestions: suggestions.length > 0 ? suggestions : undefined,
+    };
+  } catch (error) {
+    console.error('AI translation failed, using vocabulary fallback:', error);
+    // Fallback to vocabulary if AI fails
+    return {
+      translation: translatedWords.join(' '),
+      source: 'vocabulary',
+      confidence,
+      suggestions: suggestions.length > 0 ? suggestions : undefined,
+    };
+  }
+}
+
+// AI-powered translation
+async function translateWithAI(
+  text: string,
+  fromLang: string,
+  toLang: string
+): Promise<TranslationResult> {
+  const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/translate`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+    },
+    body: JSON.stringify({ text, fromLang, toLang }),
+  });
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({ error: 'Translation failed' }));
+    throw new Error(error.error || 'Translation failed');
+  }
+
+  const data = await response.json();
   return {
-    translation: translatedWords.join(' '),
-    source: 'vocabulary',
-    confidence,
-    suggestions: suggestions.length > 0 ? suggestions : undefined,
+    translation: data.translation,
+    source: 'ai',
+    confidence: data.confidence || 0.95,
   };
 }
 

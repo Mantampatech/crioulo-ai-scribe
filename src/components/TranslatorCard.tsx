@@ -19,7 +19,7 @@ import { useToast } from '../hooks/use-toast';
 import { useAuth } from '../contexts/AuthContext';
 import { PaywallModal } from './PaywallModal';
 
-const FREE_TRANSLATIONS_LIMIT = 2;
+const FREE_TRANSLATIONS_LIMIT = 10;
 const TRANSLATIONS_KEY = 'nocrioulo_translations_count';
 
 function getStoredTranslations(): number {

@@ -68,7 +68,7 @@ export function PaywallModal({ isOpen, onClose, translationsUsed }: PaywallModal
                   Limite Atingido! 🔒
                 </h2>
                 <p className="text-muted-foreground">
-                  Você já usou <strong className="text-foreground">{translationsUsed}</strong> traduções gratuitas
+                  Você já usou suas <strong className="text-foreground">10 traduções gratuitas</strong>
                 </p>
               </div>
 
