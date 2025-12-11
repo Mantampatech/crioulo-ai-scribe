@@ -3,6 +3,7 @@ import { Lock, CreditCard, Star, Zap, X } from 'lucide-react';
 import { Button } from './ui/button';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { createPortal } from 'react-dom';
 
 const STRIPE_PAYMENT_LINK = 'https://buy.stripe.com/bJe9AVfKLbGU476fyEf3a00';
 
@@ -18,10 +19,8 @@ export function PaywallModal({ isOpen, onClose, translationsUsed }: PaywallModal
 
   const handlePayment = () => {
     if (!user) {
-      // Redirect to signup first
       navigate('/signup', { state: { redirectToPayment: true } });
     } else {
-      // Open Stripe payment link
       window.open(STRIPE_PAYMENT_LINK, '_blank');
     }
   };
@@ -30,29 +29,26 @@ export function PaywallModal({ isOpen, onClose, translationsUsed }: PaywallModal
     navigate('/login', { state: { redirectToPayment: true } });
   };
 
-  return (
+  const modalContent = (
     <AnimatePresence>
       {isOpen && (
-        <>
+        <div className="fixed inset-0 z-[9999]">
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50"
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
             onClick={onClose}
           />
           
-          {/* Modal */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            className="fixed inset-0 z-[60] flex items-center justify-center p-4"
-            onClick={onClose}
-          >
-            <div 
-              className="relative w-full max-w-md bg-card rounded-2xl shadow-strong border border-border overflow-hidden max-h-[90vh] overflow-y-auto"
+          {/* Modal Container - Centered */}
+          <div className="absolute inset-0 flex items-center justify-center p-4 pointer-events-none">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="relative w-full max-w-md bg-card rounded-2xl shadow-2xl border border-border overflow-hidden pointer-events-auto"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Close button */}
@@ -141,10 +137,12 @@ export function PaywallModal({ isOpen, onClose, translationsUsed }: PaywallModal
                   Pagamento seguro via Stripe 🔐
                 </p>
               </div>
-            </div>
-          </motion.div>
-        </>
+            </motion.div>
+          </div>
+        </div>
       )}
     </AnimatePresence>
   );
+
+  return createPortal(modalContent, document.body);
 }
