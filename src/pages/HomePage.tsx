@@ -131,9 +131,6 @@ const HomePage = () => {
           <p className="text-muted-foreground text-sm">
             🌍 No Crioulo © {new Date().getFullYear()} — Tradutor Inteligente de Crioulo da Guiné-Bissau
           </p>
-          <p className="text-muted-foreground text-xs mt-2">
-            Baseado nos dicionários de Luigi Scantamburlo e Cirineu Cecote Stein
-          </p>
         </div>
       </footer>
     </div>
