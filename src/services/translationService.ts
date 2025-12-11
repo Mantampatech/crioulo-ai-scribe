@@ -77,27 +77,34 @@ export function detectLanguage(text: string): string {
   return 'unknown';
 }
 
-// Check spelling and get suggestions
+// Check spelling and get phrase suggestions
 export function checkSpelling(text: string, lang: string): SpellingSuggestion[] {
   if (lang !== 'kriol' && lang !== 'pt') return [];
   
-  const words = text.split(/\s+/);
   const suggestions: SpellingSuggestion[] = [];
+  const normalizedText = text.toLowerCase().trim();
   
-  for (const word of words) {
-    const cleanWord = word.replace(/[.,!?;:'"]/g, '');
-    if (cleanWord.length < 2) continue;
+  // Find similar phrases from common phrases
+  const relevantPhrases = commonPhrases.filter(phrase => {
+    const phraseText = lang === 'kriol' ? phrase.kriol.toLowerCase() : phrase.pt.toLowerCase();
+    // Check if any word from the input matches part of a phrase
+    const inputWords = normalizedText.split(/\s+/);
+    return inputWords.some(word => 
+      word.length > 2 && phraseText.includes(word)
+    );
+  });
+  
+  // Suggest up to 3 relevant short phrases
+  for (const phrase of relevantPhrases.slice(0, 3)) {
+    const original = lang === 'kriol' ? phrase.kriol : phrase.pt;
+    const translation = lang === 'kriol' ? phrase.pt : phrase.kriol;
     
-    // Skip if word exists
-    if (wordExists(cleanWord, lang as 'kriol' | 'pt')) continue;
-    
-    // Find similar words
-    const similar = findSimilarWords(cleanWord, lang as 'kriol' | 'pt');
-    if (similar.length > 0) {
+    // Only suggest if phrase is different from input
+    if (original.toLowerCase() !== normalizedText) {
       suggestions.push({
-        original: cleanWord,
-        suggestion: similar[0].word,
-        confidence: similar[0].similarity,
+        original: original,
+        suggestion: translation,
+        confidence: 0.9,
       });
     }
   }
