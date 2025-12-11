@@ -100,6 +100,19 @@ export function TranslatorCard() {
       const translationResult = await translate(inputText, fromLang, toLang);
       setResult(translationResult);
       
+      // Save to translation history
+      const historyItem = {
+        id: Date.now().toString(),
+        sourceText: inputText,
+        translatedText: translationResult.translation,
+        sourceLang: fromLang,
+        targetLang: toLang,
+        timestamp: new Date().toISOString()
+      };
+      const existingHistory = JSON.parse(localStorage.getItem('translation_history') || '[]');
+      const updatedHistory = [...existingHistory, historyItem].slice(-50); // Keep last 50
+      localStorage.setItem('translation_history', JSON.stringify(updatedHistory));
+      
       // Increment translation count
       if (profile) {
         // Will be incremented via AuthContext
