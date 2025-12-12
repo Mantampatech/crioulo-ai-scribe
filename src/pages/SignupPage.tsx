@@ -18,6 +18,13 @@ const SignupPage = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
 
+  const allowedDomains = ['gmail.com', 'hotmail.com', 'yahoo.com', 'outlook.com'];
+
+  const isEmailDomainAllowed = (email: string): boolean => {
+    const domain = email.toLowerCase().split('@')[1];
+    return domain ? allowedDomains.includes(domain) : false;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -25,6 +32,15 @@ const SignupPage = () => {
       toast({
         title: "Campos obrigatórios",
         description: "Por favor, preencha todos os campos",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    if (!isEmailDomainAllowed(email)) {
+      toast({
+        title: "Email não permitido",
+        description: "Use um email do Gmail, Hotmail, Yahoo ou Outlook",
         variant: "destructive"
       });
       return;
