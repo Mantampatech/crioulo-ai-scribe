@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Globe, Menu, X, User, LogIn } from 'lucide-react';
+import { Globe, Menu, X, User, LogIn, BookOpen } from 'lucide-react';
 import { Button } from './ui/button';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -34,6 +34,12 @@ export function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-2">
+            <Link to="/learn">
+              <Button variant="ghost" className="gap-2 text-primary font-medium">
+                <BookOpen className="w-4 h-4" />
+                Aprender Crioulo
+              </Button>
+            </Link>
             {user ? (
               <>
                 <Link to="/profile">
@@ -87,6 +93,12 @@ export function Header() {
           className="md:hidden bg-card border-t border-border"
         >
           <nav className="container mx-auto px-4 py-4 flex flex-col gap-2">
+            <Link to="/learn" onClick={() => setIsMenuOpen(false)}>
+              <Button variant="ghost" className="w-full justify-start gap-2 text-primary font-medium">
+                <BookOpen className="w-4 h-4" />
+                Aprender Crioulo
+              </Button>
+            </Link>
             {user ? (
               <>
                 <Link to="/profile" onClick={() => setIsMenuOpen(false)}>
