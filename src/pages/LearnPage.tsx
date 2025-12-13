@@ -3,13 +3,17 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   BookOpen, Trophy, Star, Check, X, Volume2, 
   ChevronRight, Heart, Zap, Target, Award,
-  ArrowLeft, Sparkles, Brain, MessageCircle
+  ArrowLeft, Sparkles, Brain, MessageCircle, Lock, Crown
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Header } from '@/components/Header';
 import { useToast } from '@/hooks/use-toast';
 import { Link } from 'react-router-dom';
+import { useAuth } from '@/contexts/AuthContext';
+
+// Índices das lições gratuitas (0 = Saudações Básicas, 1 = Palavras Essenciais)
+const FREE_LESSON_INDICES = [0, 1];
 
 // Tipos
 interface Lesson {
@@ -18,6 +22,7 @@ interface Lesson {
   description: string;
   icon: string;
   category: 'basics' | 'greetings' | 'food' | 'family' | 'numbers' | 'phrases';
+  isPremium?: boolean;
   exercises: Exercise[];
   xpReward: number;
 }
@@ -122,7 +127,8 @@ const lessons: Lesson[] = [
     description: 'Membros da família em Crioulo',
     icon: '👨‍👩‍👧‍👦',
     category: 'family',
-    xpReward: 60,
+    xpReward: 80,
+    isPremium: true,
     exercises: [
       {
         type: 'multiple-choice',
@@ -154,6 +160,24 @@ const lessons: Lesson[] = [
         question: 'O que significa "Abo"?',
         options: ['Eu', 'Tu/Você', 'Ele', 'Nós'],
         correctAnswer: 'Tu/Você'
+      },
+      {
+        type: 'translate',
+        question: 'Traduza: "Avó"',
+        options: ['Abo', 'Nha', 'Avo', 'Tia'],
+        correctAnswer: 'Abo'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Como se diz "Tio" em Crioulo?',
+        options: ['Tiu', 'Prima', 'Pai', 'Irmon'],
+        correctAnswer: 'Tiu'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'O que significa "Prima"?',
+        options: ['Primo', 'Prima', 'Tia', 'Irmã'],
+        correctAnswer: 'Prima'
       }
     ]
   },
@@ -163,7 +187,8 @@ const lessons: Lesson[] = [
     description: 'Aprenda a contar em Crioulo',
     icon: '🔢',
     category: 'numbers',
-    xpReward: 55,
+    xpReward: 75,
+    isPremium: true,
     exercises: [
       {
         type: 'multiple-choice',
@@ -194,6 +219,24 @@ const lessons: Lesson[] = [
         question: 'Qual é o número "Seti"?',
         options: ['Cinco', 'Seis', 'Sete', 'Oito'],
         correctAnswer: 'Sete'
+      },
+      {
+        type: 'translate',
+        question: 'Traduza: "Dois"',
+        options: ['Un', 'Dus', 'Tres', 'Kuatro'],
+        correctAnswer: 'Dus'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'O que significa "Oitu"?',
+        options: ['Seis', 'Sete', 'Oito', 'Nove'],
+        correctAnswer: 'Oito'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Como se diz "Nove" em Crioulo?',
+        options: ['Seti', 'Oitu', 'Novi', 'Des'],
+        correctAnswer: 'Novi'
       }
     ]
   },
@@ -203,7 +246,8 @@ const lessons: Lesson[] = [
     description: 'Vocabulário gastronômico',
     icon: '🍛',
     category: 'food',
-    xpReward: 60,
+    xpReward: 85,
+    isPremium: true,
     exercises: [
       {
         type: 'multiple-choice',
@@ -235,6 +279,25 @@ const lessons: Lesson[] = [
         options: ['Estou com sede', 'Estou com fome', 'Estou cansado', 'Estou bem'],
         correctAnswer: 'Estou com fome',
         hint: '"Fomi" = fome'
+      },
+      {
+        type: 'translate',
+        question: 'Traduza: "Carne"',
+        options: ['Karni', 'Pexe', 'Aros', 'Agu'],
+        correctAnswer: 'Karni'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Como se diz "Estou com sede" em Crioulo?',
+        options: ['N tene fomi', 'N tene sedi', 'N sta bon', 'N ka gosta'],
+        correctAnswer: 'N tene sedi'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'O que significa "Sal"?',
+        options: ['Açúcar', 'Sal', 'Pimenta', 'Óleo'],
+        correctAnswer: 'Sal',
+        hint: 'É igual ao Português!'
       }
     ]
   },
@@ -244,7 +307,8 @@ const lessons: Lesson[] = [
     description: 'Expressões úteis para conversação',
     icon: '💬',
     category: 'phrases',
-    xpReward: 70,
+    xpReward: 100,
+    isPremium: true,
     exercises: [
       {
         type: 'multiple-choice',
@@ -276,6 +340,36 @@ const lessons: Lesson[] = [
         question: 'Como dizer "Eu gosto de ti" em Crioulo?',
         options: ['N gosta di bo', 'N ama bo', 'Bo bonitu', 'N ka gosta'],
         correctAnswer: 'N gosta di bo'
+      },
+      {
+        type: 'translate',
+        question: 'Traduza: "Eu sei"',
+        options: ['N sabi', 'N ka sabi', 'N sta', 'N bai'],
+        correctAnswer: 'N sabi'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Como dizer "Onde fica?" em Crioulo?',
+        options: ['Kuma ki sta?', 'Undi ki sta?', 'Kantu e?', 'Kin ki e?'],
+        correctAnswer: 'Undi ki sta?'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'O que significa "N bai agora"?',
+        options: ['Estou indo agora', 'Volto logo', 'Fico aqui', 'Não vou'],
+        correctAnswer: 'Estou indo agora'
+      },
+      {
+        type: 'translate',
+        question: 'Traduza: "Até amanhã"',
+        options: ['Te logu', 'Te manjan', 'Adios', 'Bon noti'],
+        correctAnswer: 'Te manjan'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Como perguntar "Qual é o seu nome?" em Crioulo?',
+        options: ['Kuma ki bu sta?', 'Kin ki bo e?', 'Kuma ki bu tchoma?', 'Undi ki bu mora?'],
+        correctAnswer: 'Kuma ki bu tchoma?'
       }
     ]
   }
@@ -284,30 +378,36 @@ const lessons: Lesson[] = [
 // Componente de Card de Lição
 function LessonCard({ 
   lesson, 
+  lessonIndex,
   isLocked, 
   isCompleted, 
+  isPremiumLocked,
   progress,
   onStart 
 }: { 
   lesson: Lesson; 
+  lessonIndex: number;
   isLocked: boolean;
   isCompleted: boolean;
+  isPremiumLocked: boolean;
   progress: number;
   onStart: () => void;
 }) {
+  const actuallyLocked = isLocked || isPremiumLocked;
+  
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      whileHover={!isLocked ? { scale: 1.02, y: -4 } : {}}
+      whileHover={!actuallyLocked ? { scale: 1.02, y: -4 } : {}}
       className={`relative p-6 rounded-2xl border transition-all duration-300 ${
-        isLocked 
-          ? 'bg-muted/30 border-border/30 opacity-60' 
+        actuallyLocked 
+          ? 'bg-muted/30 border-border/30 opacity-70' 
           : isCompleted
             ? 'bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/30 dark:to-emerald-950/30 border-green-200 dark:border-green-800'
             : 'bg-card border-border hover:border-primary/50 hover:shadow-lg cursor-pointer'
       }`}
-      onClick={!isLocked ? onStart : undefined}
+      onClick={!actuallyLocked ? onStart : undefined}
     >
       {isCompleted && (
         <div className="absolute -top-2 -right-2 w-8 h-8 bg-green-500 rounded-full flex items-center justify-center shadow-lg">
@@ -315,17 +415,30 @@ function LessonCard({
         </div>
       )}
       
+      {isPremiumLocked && (
+        <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center shadow-lg">
+          <Crown className="w-4 h-4 text-white" />
+        </div>
+      )}
+      
       <div className="flex items-start gap-4">
         <div className={`text-4xl p-3 rounded-xl ${
-          isLocked ? 'bg-muted' : 'bg-gradient-to-br from-primary/10 to-secondary/10'
+          isPremiumLocked ? 'bg-amber-100 dark:bg-amber-900/30' : isLocked ? 'bg-muted' : 'bg-gradient-to-br from-primary/10 to-secondary/10'
         }`}>
-          {isLocked ? '🔒' : lesson.icon}
+          {isPremiumLocked ? '🔒' : isLocked ? '🔒' : lesson.icon}
         </div>
         
         <div className="flex-1">
-          <h3 className={`font-display font-bold text-lg ${isLocked ? 'text-muted-foreground' : 'text-foreground'}`}>
-            {lesson.title}
-          </h3>
+          <div className="flex items-center gap-2">
+            <h3 className={`font-display font-bold text-lg ${actuallyLocked ? 'text-muted-foreground' : 'text-foreground'}`}>
+              {lesson.title}
+            </h3>
+            {isPremiumLocked && (
+              <span className="px-2 py-0.5 text-xs font-bold bg-gradient-to-r from-amber-400 to-amber-600 text-white rounded-full">
+                PREMIUM
+              </span>
+            )}
+          </div>
           <p className="text-sm text-muted-foreground mt-1">
             {lesson.description}
           </p>
@@ -341,7 +454,7 @@ function LessonCard({
             </div>
           </div>
           
-          {!isLocked && !isCompleted && progress > 0 && (
+          {!actuallyLocked && !isCompleted && progress > 0 && (
             <div className="mt-3">
               <Progress value={progress} className="h-2" />
               <span className="text-xs text-muted-foreground mt-1">{progress}% concluído</span>
@@ -349,7 +462,7 @@ function LessonCard({
           )}
         </div>
         
-        {!isLocked && (
+        {!actuallyLocked && (
           <ChevronRight className={`w-5 h-5 ${isCompleted ? 'text-green-500' : 'text-muted-foreground'}`} />
         )}
       </div>
@@ -472,6 +585,9 @@ function ExerciseView({
 // Página Principal de Aprendizagem
 export default function LearnPage() {
   const { toast } = useToast();
+  const { profile } = useAuth();
+  const isPremiumUser = profile?.plan === 'premium';
+  
   const [activeLesson, setActiveLesson] = useState<Lesson | null>(null);
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
   const [showResult, setShowResult] = useState(false);
@@ -498,7 +614,20 @@ export default function LearnPage() {
     localStorage.setItem('crioulo-completed', JSON.stringify(completedLessons));
   }, [xp, streak, completedLessons]);
 
-  const startLesson = (lesson: Lesson) => {
+  const isLessonPremiumLocked = (index: number) => {
+    if (isPremiumUser) return false;
+    return !FREE_LESSON_INDICES.includes(index);
+  };
+
+  const startLesson = (lesson: Lesson, index: number) => {
+    if (isLessonPremiumLocked(index)) {
+      toast({
+        title: "👑 Conteúdo Premium",
+        description: "Esta lição está disponível apenas para assinantes premium. Atualize seu plano para continuar aprendendo!",
+        variant: "destructive"
+      });
+      return;
+    }
     setActiveLesson(lesson);
     setCurrentExerciseIndex(0);
     setShowResult(false);
@@ -771,10 +900,12 @@ export default function LearnPage() {
                 <LessonCard
                   key={lesson.id}
                   lesson={lesson}
+                  lessonIndex={index}
                   isLocked={index > 0 && !completedLessons.includes(lessons[index - 1].id) && completedLessons.length < index}
                   isCompleted={completedLessons.includes(lesson.id)}
+                  isPremiumLocked={isLessonPremiumLocked(index)}
                   progress={0}
-                  onStart={() => startLesson(lesson)}
+                  onStart={() => startLesson(lesson, index)}
                 />
               ))}
             </div>
