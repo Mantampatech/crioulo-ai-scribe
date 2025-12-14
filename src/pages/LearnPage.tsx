@@ -372,6 +372,516 @@ const lessons: Lesson[] = [
         correctAnswer: 'Kuma ki bu tchoma?'
       }
     ]
+  },
+  {
+    id: 'animals-1',
+    title: 'Animais',
+    description: 'Nomes de animais em Crioulo',
+    icon: '🐄',
+    category: 'basics',
+    xpReward: 90,
+    isPremium: true,
+    exercises: [
+      {
+        type: 'multiple-choice',
+        question: 'Como se diz "Vaca" em Crioulo?',
+        options: ['Gatu', 'Baka', 'Galinha', 'Kobra'],
+        correctAnswer: 'Baka',
+        hint: 'Baka na kume padja'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'O que significa "Gatu"?',
+        options: ['Cão', 'Gato', 'Rato', 'Pássaro'],
+        correctAnswer: 'Gato'
+      },
+      {
+        type: 'translate',
+        question: 'Traduza: "Galinha"',
+        options: ['Galinha', 'Galu', 'Patu', 'Fatu'],
+        correctAnswer: 'Galinha'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Como se diz "Cobra" em Crioulo?',
+        options: ['Ratu', 'Sapu', 'Kobra', 'Lebri'],
+        correctAnswer: 'Kobra',
+        hint: 'Kobra na dobra kurpu'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'O que significa "Ratu"?',
+        options: ['Gato', 'Rato', 'Sapo', 'Coelho'],
+        correctAnswer: 'Rato'
+      },
+      {
+        type: 'translate',
+        question: 'Traduza: "Porco"',
+        options: ['Baka', 'Galinha', 'Purku', 'Gatu'],
+        correctAnswer: 'Purku'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Como se diz "Galo" em Crioulo?',
+        options: ['Galinha', 'Galu', 'Fatu', 'Patu'],
+        correctAnswer: 'Galu'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'O que significa "Lebri"?',
+        options: ['Lobo', 'Lebre/Coelho', 'Leão', 'Leopardo'],
+        correctAnswer: 'Lebre/Coelho'
+      },
+      {
+        type: 'translate',
+        question: 'Traduza: "Sapo"',
+        options: ['Kobra', 'Ratu', 'Sapu', 'Pexe'],
+        correctAnswer: 'Sapu'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'O que significa "Lubu"?',
+        options: ['Lobo', 'Leão', 'Leopardo', 'Lagarto'],
+        correctAnswer: 'Lobo'
+      }
+    ]
+  },
+  {
+    id: 'body-1',
+    title: 'Corpo Humano',
+    description: 'Partes do corpo em Crioulo',
+    icon: '🫀',
+    category: 'basics',
+    xpReward: 95,
+    isPremium: true,
+    exercises: [
+      {
+        type: 'multiple-choice',
+        question: 'Como se diz "Corpo" em Crioulo?',
+        options: ['Kabesa', 'Kurpu', 'Mon', 'Pe'],
+        correctAnswer: 'Kurpu'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'O que significa "Kabesa"?',
+        options: ['Cabeça', 'Cabelo', 'Cara', 'Coração'],
+        correctAnswer: 'Cabeça'
+      },
+      {
+        type: 'translate',
+        question: 'Traduza: "Mão"',
+        options: ['Pe', 'Mon', 'Kabesa', 'Boka'],
+        correctAnswer: 'Mon'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Como se diz "Pé" em Crioulo?',
+        options: ['Mon', 'Pe', 'Kurpu', 'Didu'],
+        correctAnswer: 'Pe'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'O que significa "Boka"?',
+        options: ['Bochecha', 'Boca', 'Braço', 'Barriga'],
+        correctAnswer: 'Boca'
+      },
+      {
+        type: 'translate',
+        question: 'Traduza: "Bigode"',
+        options: ['Kabelu', 'Barba', 'Bigodi', 'Boka'],
+        correctAnswer: 'Bigodi',
+        hint: 'Gatu tene bigodi'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Como se diz "Sangue" em Crioulo?',
+        options: ['Sal', 'Sangui', 'Sedi', 'Suku'],
+        correctAnswer: 'Sangui'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'O que significa "Kabelu"?',
+        options: ['Cabeça', 'Cabelo', 'Cara', 'Coração'],
+        correctAnswer: 'Cabelo'
+      },
+      {
+        type: 'translate',
+        question: 'Traduza: "Dedo"',
+        options: ['Mon', 'Pe', 'Didu', 'Boka'],
+        correctAnswer: 'Didu'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'O que significa "Udju"?',
+        options: ['Ouvido', 'Olho', 'Unha', 'Orelha'],
+        correctAnswer: 'Olho'
+      }
+    ]
+  },
+  {
+    id: 'nature-1',
+    title: 'Natureza',
+    description: 'Elementos da natureza em Crioulo',
+    icon: '🌍',
+    category: 'basics',
+    xpReward: 90,
+    isPremium: true,
+    exercises: [
+      {
+        type: 'multiple-choice',
+        question: 'Como se diz "Água" em Crioulo?',
+        options: ['Tera', 'Iagu', 'Sol', 'Lun\'a'],
+        correctAnswer: 'Iagu'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'O que significa "Tcuba"?',
+        options: ['Nuvem', 'Chuva', 'Trovão', 'Vento'],
+        correctAnswer: 'Chuva',
+        hint: 'Labraduris ta pera tcuba'
+      },
+      {
+        type: 'translate',
+        question: 'Traduza: "Terra"',
+        options: ['Iagu', 'Sol', 'Tera', 'Lun\'a'],
+        correctAnswer: 'Tera'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Como se diz "Lua" em Crioulo?',
+        options: ['Sol', 'Strela', 'Lun\'a', 'Seu'],
+        correctAnswer: 'Lun\'a'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'O que significa "Foli"?',
+        options: ['Flor', 'Folha', 'Fruto', 'Floresta'],
+        correctAnswer: 'Folha',
+        hint: 'Fatu na kume foli'
+      },
+      {
+        type: 'translate',
+        question: 'Traduza: "Árvore"',
+        options: ['Foli', 'Pau', 'Matu', 'Padja'],
+        correctAnswer: 'Pau'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Como se diz "Palha" em Crioulo?',
+        options: ['Foli', 'Padja', 'Matu', 'Tera'],
+        correctAnswer: 'Padja',
+        hint: 'Baka na kume padja'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'O que significa "Matu"?',
+        options: ['Mar', 'Mato/Floresta', 'Monte', 'Montanha'],
+        correctAnswer: 'Mato/Floresta'
+      },
+      {
+        type: 'translate',
+        question: 'Traduza: "Mar"',
+        options: ['Iagu', 'Mar', 'Tera', 'Seu'],
+        correctAnswer: 'Mar'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'O que significa "Tabanka"?',
+        options: ['Tabaco', 'Aldeia/Vila', 'Casa', 'Cidade'],
+        correctAnswer: 'Aldeia/Vila',
+        hint: 'Nha tabanka i bunitu'
+      }
+    ]
+  },
+  {
+    id: 'verbs-1',
+    title: 'Verbos Comuns',
+    description: 'Ações do dia a dia em Crioulo',
+    icon: '🏃',
+    category: 'phrases',
+    xpReward: 100,
+    isPremium: true,
+    exercises: [
+      {
+        type: 'multiple-choice',
+        question: 'O que significa "Kume"?',
+        options: ['Correr', 'Comer', 'Cantar', 'Caminhar'],
+        correctAnswer: 'Comer',
+        hint: 'Baka na kume padja'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Como se diz "Beber" em Crioulo?',
+        options: ['Bibi', 'Bai', 'Binka', 'Badja'],
+        correctAnswer: 'Bibi'
+      },
+      {
+        type: 'translate',
+        question: 'Traduza: "Dormir"',
+        options: ['Durmi', 'Dana', 'Dobra', 'Darma'],
+        correctAnswer: 'Durmi'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'O que significa "Bai"?',
+        options: ['Ficar', 'Ir', 'Vir', 'Voltar'],
+        correctAnswer: 'Ir'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Como se diz "Dançar" em Crioulo?',
+        options: ['Kanta', 'Badja', 'Brinka', 'Dana'],
+        correctAnswer: 'Badja'
+      },
+      {
+        type: 'translate',
+        question: 'Traduza: "Cantar"',
+        options: ['Badja', 'Brinka', 'Kanta', 'Kuri'],
+        correctAnswer: 'Kanta'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'O que significa "Brinka"?',
+        options: ['Brincar', 'Brigar', 'Brilhar', 'Beber'],
+        correctAnswer: 'Brincar'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Como se diz "Correr" em Crioulo?',
+        options: ['Kuri', 'Kume', 'Kanta', 'Kreba'],
+        correctAnswer: 'Kuri'
+      },
+      {
+        type: 'translate',
+        question: 'Traduza: "Trabalhar"',
+        options: ['Brinka', 'Trabadja', 'Durmi', 'Kanta'],
+        correctAnswer: 'Trabadja'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'O que significa "Serka"?',
+        options: ['Servir', 'Procurar/Caçar', 'Sentar', 'Cercar'],
+        correctAnswer: 'Procurar/Caçar',
+        hint: 'Zezinhu na serka santcu'
+      }
+    ]
+  },
+  {
+    id: 'objects-1',
+    title: 'Objetos do Cotidiano',
+    description: 'Coisas do dia a dia em Crioulo',
+    icon: '🏠',
+    category: 'basics',
+    xpReward: 85,
+    isPremium: true,
+    exercises: [
+      {
+        type: 'multiple-choice',
+        question: 'Como se diz "Casa" em Crioulo?',
+        options: ['Kama', 'Kaza', 'Kadeira', 'Kanua'],
+        correctAnswer: 'Kaza'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'O que significa "Kadeira"?',
+        options: ['Cama', 'Caderno', 'Cadeira', 'Caixa'],
+        correctAnswer: 'Cadeira'
+      },
+      {
+        type: 'translate',
+        question: 'Traduza: "Canoa"',
+        options: ['Kaza', 'Kama', 'Kanua', 'Karu'],
+        correctAnswer: 'Kanua'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Como se diz "Carro" em Crioulo?',
+        options: ['Kanua', 'Karu', 'Karta', 'Kama'],
+        correctAnswer: 'Karu'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'O que significa "Tidjela"?',
+        options: ['Tigela', 'Tesoura', 'Tecido', 'Tenda'],
+        correctAnswer: 'Tigela'
+      },
+      {
+        type: 'translate',
+        question: 'Traduza: "Faca"',
+        options: ['Fera', 'Faka', 'Fiu', 'Forsa'],
+        correctAnswer: 'Faka'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Como se diz "Garrafa" em Crioulo?',
+        options: ['Gatu', 'Garafa', 'Galinha', 'Guera'],
+        correctAnswer: 'Garafa'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'O que significa "Tenda"?',
+        options: ['Tecido', 'Tenda/Loja', 'Telha', 'Tempo'],
+        correctAnswer: 'Tenda/Loja'
+      },
+      {
+        type: 'translate',
+        question: 'Traduza: "Banco" (assento)',
+        options: ['Baka', 'Banku', 'Biku', 'Bodi'],
+        correctAnswer: 'Banku'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'O que significa "Karta"?',
+        options: ['Carro', 'Carta', 'Casa', 'Caixa'],
+        correctAnswer: 'Carta'
+      }
+    ]
+  },
+  {
+    id: 'pronouns-1',
+    title: 'Pronomes e Gramática',
+    description: 'Pronomes pessoais e estrutura gramatical',
+    icon: '📝',
+    category: 'phrases',
+    xpReward: 110,
+    isPremium: true,
+    exercises: [
+      {
+        type: 'multiple-choice',
+        question: 'Como se diz "Eu" em Crioulo?',
+        options: ['No', 'Bo', 'N\'', 'El'],
+        correctAnswer: 'N\''
+      },
+      {
+        type: 'multiple-choice',
+        question: 'O que significa "Bo"?',
+        options: ['Eu', 'Tu/Você', 'Ele', 'Nós'],
+        correctAnswer: 'Tu/Você'
+      },
+      {
+        type: 'translate',
+        question: 'Traduza: "Nós"',
+        options: ['N\'', 'Bo', 'No', 'Elis'],
+        correctAnswer: 'No'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Como se diz "Ele/Ela" em Crioulo?',
+        options: ['N\'', 'Bo', 'El', 'No'],
+        correctAnswer: 'El'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'O que significa "Elis"?',
+        options: ['Ele', 'Ela', 'Eles/Elas', 'Vocês'],
+        correctAnswer: 'Eles/Elas'
+      },
+      {
+        type: 'translate',
+        question: 'Traduza: "Meu/Minha"',
+        options: ['Bo', 'Nha', 'Si', 'No'],
+        correctAnswer: 'Nha',
+        hint: 'Nha tabanka i bunitu'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Como se forma a negação em Crioulo?',
+        options: ['Nau', 'Ka', 'Sin', 'Na'],
+        correctAnswer: 'Ka',
+        hint: 'N ka intendi = Eu não entendo'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'O que significa "Na" em Crioulo?',
+        options: ['Não', 'Negação', 'Indica ação contínua', 'Indica passado'],
+        correctAnswer: 'Indica ação contínua',
+        hint: 'Baka na kume = A vaca está comendo'
+      },
+      {
+        type: 'translate',
+        question: 'Traduza: "Eu tenho"',
+        options: ['N\' sta', 'N\' tene', 'N\' bai', 'N\' kume'],
+        correctAnswer: 'N\' tene'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'O que significa "I" em "Nha tabanka i bunitu"?',
+        options: ['E (conjunção)', 'É (verbo ser)', 'Eu', 'Você'],
+        correctAnswer: 'É (verbo ser)'
+      }
+    ]
+  },
+  {
+    id: 'numbers-2',
+    title: 'Números 11-100',
+    description: 'Números maiores em Crioulo',
+    icon: '💯',
+    category: 'numbers',
+    xpReward: 95,
+    isPremium: true,
+    exercises: [
+      {
+        type: 'multiple-choice',
+        question: 'Como se diz "Vinte" em Crioulo?',
+        options: ['Des', 'Kinze', 'Vinti', 'Trinta'],
+        correctAnswer: 'Vinti',
+        hint: 'N\' tene vinti ovu'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'O que significa "Kinze"?',
+        options: ['Cinco', 'Quinze', 'Cinquenta', 'Quatro'],
+        correctAnswer: 'Quinze'
+      },
+      {
+        type: 'translate',
+        question: 'Traduza: "Cem"',
+        options: ['Sinku', 'Sinkuenta', 'Sen', 'Sesenta'],
+        correctAnswer: 'Sen'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Como se diz "Trinta" em Crioulo?',
+        options: ['Trez', 'Trinta', 'Treze', 'Tirinta'],
+        correctAnswer: 'Trinta'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Qual é "Kuarenta"?',
+        options: ['Quatro', 'Quarenta', 'Catorze', 'Cinquenta'],
+        correctAnswer: 'Quarenta'
+      },
+      {
+        type: 'translate',
+        question: 'Traduza: "Cinquenta"',
+        options: ['Sinku', 'Kinze', 'Sinkuenta', 'Kuarenta'],
+        correctAnswer: 'Sinkuenta'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Como se diz "Onze" em Crioulo?',
+        options: ['Un', 'Onzi', 'Dozi', 'Des'],
+        correctAnswer: 'Onzi'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'O que significa "Dozi"?',
+        options: ['Dez', 'Dois', 'Doze', 'Dezesseis'],
+        correctAnswer: 'Doze'
+      },
+      {
+        type: 'translate',
+        question: 'Traduza: "Sessenta"',
+        options: ['Seti', 'Sinkuenta', 'Sesenta', 'Setenta'],
+        correctAnswer: 'Sesenta'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Como se diz "Oitenta" em Crioulo?',
+        options: ['Oitu', 'Oitenta', 'Noventa', 'Setenta'],
+        correctAnswer: 'Oitenta'
+      }
+    ]
   }
 ];
 
