@@ -621,11 +621,7 @@ export default function LearnPage() {
 
   const startLesson = (lesson: Lesson, index: number) => {
     if (isLessonPremiumLocked(index)) {
-      toast({
-        title: "👑 Conteúdo Premium",
-        description: "Esta lição está disponível apenas para assinantes premium. Atualize seu plano para continuar aprendendo!",
-        variant: "destructive"
-      });
+      window.open('https://buy.stripe.com/bJe9AVfKLbGU476fyEf3a00', '_blank');
       return;
     }
     setActiveLesson(lesson);
