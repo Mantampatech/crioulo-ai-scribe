@@ -393,21 +393,33 @@ function LessonCard({
   progress: number;
   onStart: () => void;
 }) {
-  const actuallyLocked = isLocked || isPremiumLocked;
+  const actuallyLocked = isLocked && !isPremiumLocked;
+  
+  const handleClick = () => {
+    if (isPremiumLocked) {
+      window.open('https://buy.stripe.com/bJe9AVfKLbGU476fyEf3a00', '_blank');
+      return;
+    }
+    if (!isLocked) {
+      onStart();
+    }
+  };
   
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       whileHover={!actuallyLocked ? { scale: 1.02, y: -4 } : {}}
-      className={`relative p-6 rounded-2xl border transition-all duration-300 ${
+      className={`relative p-6 rounded-2xl border transition-all duration-300 cursor-pointer ${
         actuallyLocked 
           ? 'bg-muted/30 border-border/30 opacity-70' 
-          : isCompleted
-            ? 'bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/30 dark:to-emerald-950/30 border-green-200 dark:border-green-800'
-            : 'bg-card border-border hover:border-primary/50 hover:shadow-lg cursor-pointer'
+          : isPremiumLocked
+            ? 'bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/30 border-amber-200 dark:border-amber-800 hover:border-amber-400 hover:shadow-lg'
+            : isCompleted
+              ? 'bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/30 dark:to-emerald-950/30 border-green-200 dark:border-green-800'
+              : 'bg-card border-border hover:border-primary/50 hover:shadow-lg'
       }`}
-      onClick={!actuallyLocked ? onStart : undefined}
+      onClick={handleClick}
     >
       {isCompleted && (
         <div className="absolute -top-2 -right-2 w-8 h-8 bg-green-500 rounded-full flex items-center justify-center shadow-lg">
@@ -430,7 +442,7 @@ function LessonCard({
         
         <div className="flex-1">
           <div className="flex items-center gap-2">
-            <h3 className={`font-display font-bold text-lg ${actuallyLocked ? 'text-muted-foreground' : 'text-foreground'}`}>
+            <h3 className={`font-display font-bold text-lg ${actuallyLocked ? 'text-muted-foreground' : isPremiumLocked ? 'text-amber-700 dark:text-amber-400' : 'text-foreground'}`}>
               {lesson.title}
             </h3>
             {isPremiumLocked && (
@@ -454,7 +466,7 @@ function LessonCard({
             </div>
           </div>
           
-          {!actuallyLocked && !isCompleted && progress > 0 && (
+          {!actuallyLocked && !isPremiumLocked && !isCompleted && progress > 0 && (
             <div className="mt-3">
               <Progress value={progress} className="h-2" />
               <span className="text-xs text-muted-foreground mt-1">{progress}% concluído</span>
@@ -462,8 +474,8 @@ function LessonCard({
           )}
         </div>
         
-        {!actuallyLocked && (
-          <ChevronRight className={`w-5 h-5 ${isCompleted ? 'text-green-500' : 'text-muted-foreground'}`} />
+        {(!actuallyLocked || isPremiumLocked) && (
+          <ChevronRight className={`w-5 h-5 ${isCompleted ? 'text-green-500' : isPremiumLocked ? 'text-amber-500' : 'text-muted-foreground'}`} />
         )}
       </div>
     </motion.div>
