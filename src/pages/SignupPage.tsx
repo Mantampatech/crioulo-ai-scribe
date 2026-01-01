@@ -70,9 +70,9 @@ const SignupPage = () => {
       await signUp(email, password, displayName);
       toast({
         title: "Conta criada! 🎉",
-        description: "Bem-vindo ao No Crioulo! Você ganhou 10 traduções grátis.",
+        description: "Verifique seu email para ativar sua conta.",
       });
-      navigate('/');
+      navigate('/verificar-email');
     } catch (error: any) {
       let message = "Ocorreu um erro ao criar a conta";
       if (error.code === 'auth/email-already-in-use') {
