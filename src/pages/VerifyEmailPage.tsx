@@ -11,11 +11,19 @@ export default function VerifyEmailPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (!currentUser) {
+      navigate('/login');
+      return;
+    }
     // Se já está verificado, redireciona
-    if (currentUser?.emailVerified) {
+    if (currentUser.emailVerified) {
       navigate('/');
     }
   }, [currentUser, navigate]);
+
+  if (!currentUser) {
+    return null;
+  }
 
   const handleCheckVerification = async () => {
     setChecking(true);
