@@ -42,7 +42,7 @@ export function Header() {
             </Link>
             {user ? (
               <>
-                <Link to="/profile">
+                <Link to="/perfil">
                   <Button variant="ghost" className="gap-2">
                     <User className="w-4 h-4" />
                     <span>{profile?.displayName || 'Perfil'}</span>
@@ -65,7 +65,7 @@ export function Header() {
                     Entrar
                   </Button>
                 </Link>
-                <Link to="/signup">
+                <Link to="/cadastro">
                   <Button variant="hero">
                     Cadastrar Grátis
                   </Button>
@@ -101,7 +101,7 @@ export function Header() {
             </Link>
             {user ? (
               <>
-                <Link to="/profile" onClick={() => setIsMenuOpen(false)}>
+                <Link to="/perfil" onClick={() => setIsMenuOpen(false)}>
                   <Button variant="ghost" className="w-full justify-start gap-2">
                     <User className="w-4 h-4" />
                     {profile?.displayName || 'Perfil'}
@@ -119,7 +119,7 @@ export function Header() {
                     Entrar
                   </Button>
                 </Link>
-                <Link to="/signup" onClick={() => setIsMenuOpen(false)}>
+                <Link to="/cadastro" onClick={() => setIsMenuOpen(false)}>
                   <Button variant="hero" className="w-full">
                     Cadastrar Grátis
                   </Button>
