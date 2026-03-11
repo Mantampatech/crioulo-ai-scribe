@@ -64,6 +64,12 @@ const App = () => (
             <Route path="/cadastro" element={<SignupPage />} />
             <Route path="/verificar-email" element={<VerifyEmailPage />} />
             <Route path="/learn" element={<LearnPage />} />
+            <Route path="/sobre" element={<AboutPage />} />
+            <Route path="/contato" element={<ContactPage />} />
+            <Route path="/isencao" element={<DisclaimerPage />} />
+            <Route path="/privacidade" element={<PrivacyPage />} />
+            <Route path="/cookies" element={<CookiesPage />} />
+            <Route path="/termos" element={<TermsPage />} />
             <Route
               path="/perfil"
               element={

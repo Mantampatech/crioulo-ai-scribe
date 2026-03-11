@@ -126,14 +126,7 @@ const HomePage = () => {
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="py-8 border-t border-border bg-secondary/30">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-muted-foreground text-sm">
-            🌍 No Crioulo © {new Date().getFullYear()} — Tradutor Inteligente de Crioulo da Guiné-Bissau
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };
