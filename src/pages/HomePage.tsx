@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Header } from '../components/Header';
+import { Footer } from '../components/Footer';
 import { TranslatorCard } from '../components/TranslatorCard';
 import { TopWords } from '../components/TopWords';
 import { CTABanner } from '../components/CTABanner';
@@ -125,14 +126,7 @@ const HomePage = () => {
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="py-8 border-t border-border bg-secondary/30">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-muted-foreground text-sm">
-            🌍 No Crioulo © {new Date().getFullYear()} — Tradutor Inteligente de Crioulo da Guiné-Bissau
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

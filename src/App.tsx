@@ -10,6 +10,12 @@ import SignupPage from "./pages/SignupPage";
 import ProfilePage from "./pages/ProfilePage";
 import LearnPage from "./pages/LearnPage";
 import VerifyEmailPage from "./pages/VerifyEmailPage";
+import AboutPage from "./pages/AboutPage";
+import ContactPage from "./pages/ContactPage";
+import DisclaimerPage from "./pages/DisclaimerPage";
+import PrivacyPage from "./pages/PrivacyPage";
+import CookiesPage from "./pages/CookiesPage";
+import TermsPage from "./pages/TermsPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -58,6 +64,12 @@ const App = () => (
             <Route path="/cadastro" element={<SignupPage />} />
             <Route path="/verificar-email" element={<VerifyEmailPage />} />
             <Route path="/learn" element={<LearnPage />} />
+            <Route path="/sobre" element={<AboutPage />} />
+            <Route path="/contato" element={<ContactPage />} />
+            <Route path="/isencao" element={<DisclaimerPage />} />
+            <Route path="/privacidade" element={<PrivacyPage />} />
+            <Route path="/cookies" element={<CookiesPage />} />
+            <Route path="/termos" element={<TermsPage />} />
             <Route
               path="/perfil"
               element={
