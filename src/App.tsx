@@ -16,6 +16,7 @@ import DisclaimerPage from "./pages/DisclaimerPage";
 import PrivacyPage from "./pages/PrivacyPage";
 import CookiesPage from "./pages/CookiesPage";
 import TermsPage from "./pages/TermsPage";
+import HistoryPage from "./pages/HistoryPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -70,6 +71,7 @@ const App = () => (
             <Route path="/privacidade" element={<PrivacyPage />} />
             <Route path="/cookies" element={<CookiesPage />} />
             <Route path="/termos" element={<TermsPage />} />
+            <Route path="/historia-do-kriol" element={<HistoryPage />} />
             <Route
               path="/perfil"
               element={

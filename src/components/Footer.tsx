@@ -9,6 +9,7 @@ export function Footer() {
             <h4 className="font-display font-bold text-sm text-foreground mb-3">NoCrioulo</h4>
             <ul className="space-y-2 text-sm">
               <li><Link to="/sobre" className="text-muted-foreground hover:text-primary transition-colors">Sobre Nós</Link></li>
+              <li><Link to="/historia-do-kriol" className="text-muted-foreground hover:text-primary transition-colors">História do Kriol</Link></li>
               <li><Link to="/contato" className="text-muted-foreground hover:text-primary transition-colors">Contate-nos</Link></li>
             </ul>
           </div>
