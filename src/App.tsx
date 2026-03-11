@@ -71,6 +71,7 @@ const App = () => (
             <Route path="/privacidade" element={<PrivacyPage />} />
             <Route path="/cookies" element={<CookiesPage />} />
             <Route path="/termos" element={<TermsPage />} />
+            <Route path="/historia-do-kriol" element={<HistoryPage />} />
             <Route
               path="/perfil"
               element={
