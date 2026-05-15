@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Globe, Menu, X, User, LogIn, BookOpen } from 'lucide-react';
+import { Globe, Menu, X, User, LogIn, BookOpen, Store, Heart } from 'lucide-react';
 import { Button } from './ui/button';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -38,6 +38,18 @@ export function Header() {
               <Button variant="ghost" className="gap-2 text-primary font-medium">
                 <BookOpen className="w-4 h-4" />
                 Aprender Crioulo
+              </Button>
+            </Link>
+            <Link to="/loja">
+              <Button variant="ghost" className="gap-2">
+                <Store className="w-4 h-4" />
+                Loja
+              </Button>
+            </Link>
+            <Link to="/apoiar">
+              <Button variant="outline" className="gap-2 border-red-500/40 text-red-500 hover:bg-red-500/10 hover:text-red-600">
+                <Heart className="w-4 h-4" fill="currentColor" />
+                Apoiar
               </Button>
             </Link>
             {user ? (
@@ -97,6 +109,18 @@ export function Header() {
               <Button variant="ghost" className="w-full justify-start gap-2 text-primary font-medium">
                 <BookOpen className="w-4 h-4" />
                 Aprender Crioulo
+              </Button>
+            </Link>
+            <Link to="/loja" onClick={() => setIsMenuOpen(false)}>
+              <Button variant="ghost" className="w-full justify-start gap-2">
+                <Store className="w-4 h-4" />
+                Loja
+              </Button>
+            </Link>
+            <Link to="/apoiar" onClick={() => setIsMenuOpen(false)}>
+              <Button variant="outline" className="w-full justify-start gap-2 border-red-500/40 text-red-500">
+                <Heart className="w-4 h-4" fill="currentColor" />
+                Apoiar
               </Button>
             </Link>
             {user ? (
