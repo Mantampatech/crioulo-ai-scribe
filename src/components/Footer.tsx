@@ -11,6 +11,7 @@ export function Footer() {
               <li><Link to="/sobre" className="text-muted-foreground hover:text-primary transition-colors">Sobre Nós</Link></li>
               <li><Link to="/historia-do-kriol" className="text-muted-foreground hover:text-primary transition-colors">História do Kriol</Link></li>
               <li><Link to="/contato" className="text-muted-foreground hover:text-primary transition-colors">Contate-nos</Link></li>
+              <li><Link to="/curriculo" className="text-muted-foreground hover:text-primary transition-colors">Criar Currículo</Link></li>
               <li><Link to="/loja" className="text-muted-foreground hover:text-primary transition-colors">Loja</Link></li>
               <li><Link to="/apoiar" className="text-muted-foreground hover:text-primary transition-colors">Apoiar o projeto</Link></li>
             </ul>
