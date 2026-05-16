@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Globe, Menu, X, User, LogIn, BookOpen, Store, Heart } from 'lucide-react';
+import { Globe, Menu, X, User, LogIn, BookOpen, Store, Heart, FileText } from 'lucide-react';
 import { Button } from './ui/button';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -38,6 +38,13 @@ export function Header() {
               <Button variant="ghost" className="gap-2 text-primary font-medium">
                 <BookOpen className="w-4 h-4" />
                 Aprender Crioulo
+              </Button>
+            </Link>
+            <Link to="/curriculo">
+              <Button variant="ghost" className="gap-2 relative">
+                <FileText className="w-4 h-4" />
+                Criar CV
+                <span className="text-[9px] font-bold bg-primary text-primary-foreground px-1.5 py-0.5 rounded-full">NOVO</span>
               </Button>
             </Link>
             <Link to="/loja">
@@ -109,6 +116,12 @@ export function Header() {
               <Button variant="ghost" className="w-full justify-start gap-2 text-primary font-medium">
                 <BookOpen className="w-4 h-4" />
                 Aprender Crioulo
+              </Button>
+            </Link>
+            <Link to="/curriculo" onClick={() => setIsMenuOpen(false)}>
+              <Button variant="ghost" className="w-full justify-start gap-2">
+                <FileText className="w-4 h-4" />
+                Criar CV
               </Button>
             </Link>
             <Link to="/loja" onClick={() => setIsMenuOpen(false)}>
