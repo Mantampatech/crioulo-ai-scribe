@@ -551,7 +551,6 @@ function FormatCard({ active, onClick, title, desc, badge, premium }: { active: 
 }
 
 // ====== CV Preview component ======
-import { forwardRef } from 'react';
 
 const CVPreview = forwardRef<HTMLDivElement, { cv: GeneratedCV; foto: string; estilo: FormState['estilo']; cor: string; isPremium: boolean }>(
   ({ cv, foto, estilo, cor, isPremium }, ref) => {
