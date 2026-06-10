@@ -105,7 +105,7 @@ const App = () => (
             <Route path="/apoiar" element={<DonatePage />} />
             <Route path="/doacoes" element={<DonatePage />} />
             <Route path="/loja" element={<ShopPage />} />
-            <Route path="/curriculo" element={<CurriculoPage />} />
+            <Route path="/curriculo" element={<CurriculoRoute />} />
             <Route
               path="/perfil"
               element={
