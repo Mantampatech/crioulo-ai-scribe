@@ -20,6 +20,7 @@ import HistoryPage from "./pages/HistoryPage";
 import DonatePage from "./pages/DonatePage";
 import ShopPage from "./pages/ShopPage";
 import CurriculoPage from "./pages/CurriculoPage";
+import CurriculoBlockedPage from "./pages/CurriculoBlockedPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
