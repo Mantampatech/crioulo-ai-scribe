@@ -44,7 +44,15 @@ export function Header() {
               <Button variant="ghost" className="gap-2 relative">
                 <FileText className="w-4 h-4" />
                 Criar CV
-                <span className="text-[9px] font-bold bg-primary text-primary-foreground px-1.5 py-0.5 rounded-full">NOVO</span>
+                {!user && (
+                  <span className="text-[9px] font-bold bg-muted text-muted-foreground px-1.5 py-0.5 rounded-full flex items-center gap-0.5">
+                    <Lock className="w-2.5 h-2.5" />
+                    Membros
+                  </span>
+                )}
+                {user && (
+                  <span className="text-[9px] font-bold bg-primary text-primary-foreground px-1.5 py-0.5 rounded-full">NOVO</span>
+                )}
               </Button>
             </Link>
             <Link to="/loja">
