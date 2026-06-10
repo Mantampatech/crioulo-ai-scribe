@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Globe, Menu, X, User, LogIn, BookOpen, Store, Heart, FileText } from 'lucide-react';
+import { Globe, Menu, X, User, LogIn, BookOpen, Store, Heart, FileText, Lock } from 'lucide-react';
 import { Button } from './ui/button';
 import { useAuth } from '../contexts/AuthContext';
 
