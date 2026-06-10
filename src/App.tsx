@@ -20,6 +20,7 @@ import HistoryPage from "./pages/HistoryPage";
 import DonatePage from "./pages/DonatePage";
 import ShopPage from "./pages/ShopPage";
 import CurriculoPage from "./pages/CurriculoPage";
+import CurriculoBlockedPage from "./pages/CurriculoBlockedPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -55,6 +56,32 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
 
+function CurriculoRoute() {
+  const { currentUser, loading } = useAuth();
+
+  if (loading) {
+    return (
+      <div style={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        color: 'white',
+        fontSize: '20px'
+      }}>
+        ⏳ Carregando...
+      </div>
+    );
+  }
+
+  if (!currentUser) {
+    return <CurriculoBlockedPage />;
+  }
+
+  return <CurriculoPage />;
+}
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
@@ -78,7 +105,7 @@ const App = () => (
             <Route path="/apoiar" element={<DonatePage />} />
             <Route path="/doacoes" element={<DonatePage />} />
             <Route path="/loja" element={<ShopPage />} />
-            <Route path="/curriculo" element={<CurriculoPage />} />
+            <Route path="/curriculo" element={<CurriculoRoute />} />
             <Route
               path="/perfil"
               element={

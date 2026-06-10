@@ -36,7 +36,13 @@ const LoginPage = () => {
         title: "Bem-vindo de volta! 🎉",
         description: "Login realizado com sucesso",
       });
-      navigate('/');
+      const redirect = sessionStorage.getItem('redirectAfterAuth');
+      if (redirect) {
+        sessionStorage.removeItem('redirectAfterAuth');
+        navigate(redirect);
+      } else {
+        navigate('/');
+      }
     } catch (error: any) {
       let message = "Ocorreu um erro ao fazer login";
       if (error.code === 'auth/invalid-credential') {

@@ -15,9 +15,15 @@ export default function VerifyEmailPage() {
       navigate('/login');
       return;
     }
-    // Se já está verificado, redireciona
+    // Se já está verificado, redireciona (respeitando redirectAfterAuth)
     if (currentUser.emailVerified) {
-      navigate('/');
+      const redirect = sessionStorage.getItem('redirectAfterAuth');
+      if (redirect) {
+        sessionStorage.removeItem('redirectAfterAuth');
+        navigate(redirect);
+      } else {
+        navigate('/');
+      }
     }
   }, [currentUser, navigate]);
 
@@ -34,7 +40,15 @@ export default function VerifyEmailPage() {
       
       if (isVerified) {
         setMessage('✅ Email verificado com sucesso!');
-        setTimeout(() => navigate('/'), 2000);
+        const redirect = sessionStorage.getItem('redirectAfterAuth');
+        setTimeout(() => {
+          if (redirect) {
+            sessionStorage.removeItem('redirectAfterAuth');
+            navigate(redirect);
+          } else {
+            navigate('/');
+          }
+        }, 2000);
       } else {
         setMessage('❌ Email ainda não foi verificado. Verifique sua caixa de entrada.');
       }
